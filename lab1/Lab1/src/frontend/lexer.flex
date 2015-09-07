@@ -16,13 +16,13 @@ import static frontend.Token.Type.*;
 %column
 
 %{
-	/* These two methods are for the convenience of rules to create toke objects.
+	/* These two methods are for the convenience of rules to create token objects.
 	* If you do not want to use them, delete them
 	* otherwise add the code in 
 	*/
 	
 	private Token token(Token.Type type) {
-		
+		return new Token(type, yyline, yycolumn, yytext());
 	}
 	
 	/* Use this method for rules where you need to process yytext() to get the lexeme of the token.
@@ -31,7 +31,7 @@ import static frontend.Token.Type.*;
 	 *       but they should not be part of the lexeme. 
 	*/
 	private Token token(Token.Type type, String text) {
-		
+		return new Token(type, yyline, yycolumn, text);
 	}
 %}
 
@@ -41,7 +41,7 @@ WhiteSpace = [ ] | \t | \f | \n | \r
 
 %%
 /* put in your rules here.    */
-
+[0-9][0-9]			{return token(INT_LITERAL);}
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }

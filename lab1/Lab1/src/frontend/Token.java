@@ -1,7 +1,7 @@
 package frontend;
 
 /**
- * Class for representing tokens. Each token is characterised by its token type, its lexeme,
+ * Class for representing tokens. Each token is characterized by its token type, its lexeme,
  * and its source position (given by its line and column numbers).
  * 
  * You do not need to change anything in this file.
@@ -9,6 +9,7 @@ package frontend;
 public final class Token {
 	/** Token types are provided as an enum. */
 	public enum Type {
+		
 		// keywords
 		BOOLEAN,
 		BREAK,
@@ -59,10 +60,12 @@ public final class Token {
 		EOF
 	};
 	
+	
 	private final Type type;
 	private final int line, column;
 	private final String lexeme;
 	
+	// Constructor
 	public Token(Type type, int line, int column, String lexeme) {
 		assert type != null;
 		assert line >= 0;
