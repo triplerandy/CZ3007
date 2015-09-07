@@ -42,7 +42,7 @@ Digit = [0-9]
 
 %%
 /* put in your rules here.    */
-(" "){Digit}{Digit}ab			{return token(INT_LITERAL);}
+{Digit}{Digit}			{return token(INT_LITERAL);}
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }

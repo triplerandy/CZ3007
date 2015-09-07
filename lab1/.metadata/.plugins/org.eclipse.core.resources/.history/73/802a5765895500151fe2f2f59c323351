@@ -37,12 +37,11 @@ import static frontend.Token.Type.*;
 
 /* This definition may come in handy. If you wish, you can add more definitions here. */
 WhiteSpace = [ ] | \t | \f | \n | \r
-Digit = [0-9]
 
 
 %%
 /* put in your rules here.    */
-(" "){Digit}{Digit}ab			{return token(INT_LITERAL);}
+[0-9][0-9](" ")*			{return token(INT_LITERAL);}
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }
