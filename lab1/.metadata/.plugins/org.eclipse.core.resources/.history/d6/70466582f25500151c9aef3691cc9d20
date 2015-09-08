@@ -121,15 +121,6 @@ public class LexerTests {
 	}
 	
 	@Test
-	public void testKeywordsWithPunctuationsSymbols(){
-		runtest(" module [ break", 
-				new Token(MODULE, 0, 1, "module"),
-				new Token(LBRACKET, 0, 8, "["),
-				new Token(BREAK, 0, 10, "break"), 
-				new Token(EOF, 0, 15, ""));
-	}
-	
-	@Test
 	public void testIdentifiers(){
 		
 	}

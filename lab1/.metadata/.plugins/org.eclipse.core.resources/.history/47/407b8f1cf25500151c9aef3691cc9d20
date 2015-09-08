@@ -121,15 +121,6 @@ public class LexerTests {
 	}
 	
 	@Test
-	public void testKeywordsWithPunctuationsSymbols(){
-		runtest(" module [ break", 
-				new Token(MODULE, 0, 1, "module"),
-				new Token(LBRACKET, 0, 8, "["),
-				new Token(BREAK, 0, 10, "break"), 
-				new Token(EOF, 0, 15, ""));
-	}
-	
-	@Test
 	public void testIdentifiers(){
 		
 	}
@@ -139,5 +130,55 @@ public class LexerTests {
 		
 	}
 	
+	@Test
+	public void testTry(){
+		runtest("  23ab    23bc",
+				new Token(INT_LITERAL, 0, 0, "23ab"),
+				new Token(STRING_LITERAL, 0, 0, "23bc"),
+				new Token(EOF, 0, 0, ""));
+	}
 	
+//	@Test
+//	public void testKW(){
+//		runtest(" module break else if int while void type ",
+//				new Token(MODULE, 0, 0, ""),
+//				new Token(BREAK, 0, 0, ""),
+//				new Token(ELSE, 0, 0, ""),
+//				new Token(IF, 0, 0, ""),
+//				new Token(INT, 0, 0, ""),
+//				new Token(WHILE, 0, 0, ""),
+//				new Token(VOID, 0, 0, ""),
+//				new Token(TYPE, 0, 0, ""),
+//				new Token(EOF, 0, 0, ""));
+//	}
+	
+//	@Test
+//	public void testOperators(){
+//		runtest("/ == = >= > <= < - != + *",
+//				new Token(DIV, 0, 0, "/"),
+//				new Token(EQEQ, 0, 2, "=="),
+//				new Token(EQL, 0, 5, "="),
+//				new Token(GEQ, 0, 9, ">="),
+//				new Token(GT, 0, ),
+//				new Token(LEQ),
+//				new Token(LT),
+//				new Token(MINUS),
+//				new Token(NEQ),
+//				new Token(PLUS),
+//				new Token(TIMES),
+//				new Token(EOF));
+//
+//	}
+	
+//	@Test
+//	public void testIdentifiers(){
+//		runtest("",
+//				);
+//	}
+//	
+//	@Test
+//	public void testLiterals(){
+//		runtest("",
+//				);
+//	}
 }
