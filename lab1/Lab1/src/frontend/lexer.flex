@@ -22,7 +22,7 @@ import static frontend.Token.Type.*;
 	*/
 	
 	private Token token(Token.Type type) {
-		return new Token(type, yyline, yycolumn, yytext());
+		return new Token(type, 0, 0, "");
 	}
 	
 	/* Use this method for rules where you need to process yytext() to get the lexeme of the token.
@@ -36,13 +36,16 @@ import static frontend.Token.Type.*;
 %}
 
 /* This definition may come in handy. If you wish, you can add more definitions here. */
-WhiteSpace = [ ] | \t | \f | \n | \r
+WhiteSpace = [" "] | \t | \f | \n | \r
 Digit = [0-9]
+
 
 
 %%
 /* put in your rules here.    */
-(" "){Digit}{Digit}ab			{return token(INT_LITERAL);}
+{WhiteSpace}+                      {System.out.println("I am whitespace");}
+{Digit}{Digit}ab			{return token(INT_LITERAL);}
+{Digit}{Digit}bc			{return token(STRING_LITERAL);}
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }

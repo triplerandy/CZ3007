@@ -107,9 +107,10 @@ public class LexerTests {
 	
 	@Test
 	public void testTry(){
-		runtest(" 23ab",
-				new Token(INT_LITERAL, 0, 0, " 23ab"),
-				new Token(EOF, 0, 5, ""));
+		runtest("  23ab    23bc",
+				new Token(INT_LITERAL, 0, 0, ""),
+				new Token(STRING_LITERAL, 0, 0, ""),
+				new Token(EOF, 0, 0, ""));
 	}
 	
 //	@Test
