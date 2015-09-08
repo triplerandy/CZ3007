@@ -1,0 +1,156 @@
+package test;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+import java.io.StringReader;
+
+import lexer.Lexer;
+
+import org.junit.Test;
+
+import frontend.Token;
+import frontend.Token.Type;
+import static frontend.Token.Type.*;
+
+/**
+ * This class contains unit tests for your lexer. You
+ * are strongly encouraged to write your own tests.
+ */
+public class LexerTests {
+	
+	// helper method to run tests; no need to change this
+	private final void runtest(String input, Token... output) { // function(Class... object): multiple object of class will be passed as arguments
+		Lexer lexer = new Lexer(new StringReader(input));
+		int i=0;
+		Token actual, expected;
+		try {
+			do {
+				assertTrue(i < output.length);
+				expected = output[i++];
+				try {
+					actual = lexer.nextToken();
+					assertEquals(expected, actual);
+				} catch(Error e) {
+					if(expected != null)
+						fail(e.getMessage());
+					return;
+				}
+			} while(!actual.isEOF());
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+
+	/** Example unit test. */
+	@Test
+	public void testKWs() {
+		// first argument to run test is the string to lex; the remaining arguments
+		// are the expected tokens
+		runtest("module false\nreturn while",
+				new Token(MODULE, 0, 0, "module"),
+				new Token(FALSE, 0, 7, "false"),
+				new Token(RETURN, 1, 0, "return"),
+				new Token(WHILE, 1, 7, "while"),
+				new Token(EOF, 1, 12, ""));
+	}
+
+		
+	@Test
+	public void testStringLiteralWithDoubleQuote() {
+		runtest("\"\"\"",
+				(Token)null);
+	}
+	
+	@Test
+	public void testStringLiteralEscapeCharacter() {
+		runtest(" \"\\n\" ",
+				new Token(STRING_LITERAL, 0, 0, "\\n"),
+				new Token(EOF, 0, 4, ""));
+	}
+	
+	@Test
+	public void testKeywords(){
+		runtest("boolean break else if import int public module return false true type void \n while",  
+				new Token(BOOLEAN, 0, 0, "boolean"),
+				new Token(BREAK, 0, 8,"break"),
+				new Token(ELSE, 0, 14, "else"),
+				new Token(IF, 0, 19, "if"),
+				new Token(IMPORT, 0, 22 , "import"),
+				new Token(INT, 0, 29, "int"),
+				new Token(PUBLIC, 0, 33 , "public"),
+				new Token(MODULE, 0, 40 , "module"),
+				new Token(RETURN, 0, 47 , "return"),
+				new Token(FALSE, 0, 54, "false"),
+				new Token(TRUE, 0, 60, "true"),
+				new Token(TYPE, 0, 65, "type"),
+				new Token(VOID, 0, 70, "void"),
+				new Token(WHILE, 1, 1, "while"), 
+				new Token(EOF, 1, 6, ""));
+	}
+	
+	@Test
+	public void testPunctuationSymbols(){
+		runtest(" , [ { ( ] } ) ;", 
+				new Token(COMMA, 0, 1, ","),
+				new Token(LBRACKET, 0, 3, "[" ),
+				new Token(LCURLY, 0, 5, "{"),
+				new Token(LPAREN, 0, 7, "("),
+				new Token(RBRACKET,0, 9, "]"),
+				new Token(RCURLY, 0, 11, "}"),
+				new Token(RPAREN, 0, 13, ")"),
+				new Token(SEMICOLON, 0, 15, ";"),
+				new Token(EOF, 0, 16, ""));
+	}
+	@Test
+	public void testOperators(){
+		runtest(" / == = >= > <= < - != + *", 
+				new Token(DIV, 0, 1, "/"),
+				new Token(EQEQ, 0, 3, "=="),
+				new Token(EQL, 0, 6, "="),
+				new Token(GEQ, 0, 8, ">="),
+				new Token(GT, 0, 11, ">"),
+				new Token(LEQ, 0, 13, "<="),
+				new Token(LT, 0, 16,"<"),
+				new Token(MINUS, 0, 18, "-"),
+				new Token(NEQ, 0, 20, "!="),
+				new Token(PLUS, 0, 23, "+"),
+				new Token(TIMES, 0, 25, "*"),
+				new Token(EOF, 0, 26, ""));
+	}
+	
+	@Test
+	public void testKeywordsWithPunctuationsSymbols(){
+		runtest(" module [ break", 
+				new Token(MODULE, 0, 1, "module"),
+				new Token(LBRACKET, 0, 8, "["),
+				new Token(BREAK, 0, 10, "break"), 
+				new Token(EOF, 0, 15, ""));
+	}
+	
+	@Test
+	public void testIdentifiersWithKeywords(){
+		runtest(" _B3232reak break ", 
+				new Token(ID, 0, 1, "_B3232reak"),
+				new Token(BREAK, 0, 12, "break"),
+				new Token(EOF, 0, 18, ""));
+	}
+	
+	@Test
+	public void testIdentifierWithPunctuationSymbols(){
+		runtest("int myInt", 
+				new Token(INT, 0, 0, "int"),
+				new Token(ID, 0 , 4, "myInt"),
+				new Token(EOF, 0, 9, ""));
+	}
+	
+	@Test
+	public void testLiterals(){
+		runtest("3", 
+				new Token(INT_LITERAL, 0, 0, "3"),
+				new Token(EOF, 0, 1, ""));
+	}
+	
+	
+}

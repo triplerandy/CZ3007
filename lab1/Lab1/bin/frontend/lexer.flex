@@ -44,8 +44,6 @@ Digit = [0-9]
 %%
 /* put in your rules here.    */
 {WhiteSpace}+                      {System.out.println("I am whitespace");}
-{Digit}{Digit}ab			{return token(INT_LITERAL);}
-{Digit}{Digit}bc			{return token(STRING_LITERAL);}
 
 // Keywords
 boolean					{return token(BOOLEAN);}
@@ -88,8 +86,10 @@ while					{return token(WHILE);}
 "*"					{return token(TIMES);}
 	
 // Identifiers
+([a-zA-z] | "_")([a-zA-Z] | "_" | {Digit})* 		{return token(ID);} 
 
 // Literals
+([0-9])+ 			{return token(INT_LITERAL);}
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }

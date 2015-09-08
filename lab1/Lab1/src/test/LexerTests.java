@@ -65,7 +65,7 @@ public class LexerTests {
 	
 	@Test
 	public void testStringLiteralEscapeCharacter() {
-		runtest("\"\\n\"",
+		runtest(" \"\\n\" ",
 				new Token(STRING_LITERAL, 0, 0, "\\n"),
 				new Token(EOF, 0, 4, ""));
 	}
@@ -130,13 +130,26 @@ public class LexerTests {
 	}
 	
 	@Test
-	public void testIdentifiers(){
-		
+	public void testIdentifiersWithKeywords(){
+		runtest(" _B3232reak break ", 
+				new Token(ID, 0, 1, "_B3232reak"),
+				new Token(BREAK, 0, 12, "break"),
+				new Token(EOF, 0, 18, ""));
+	}
+	
+	@Test
+	public void testIdentifierWithPunctuationSymbols(){
+		runtest("int myInt", 
+				new Token(INT, 0, 0, "int"),
+				new Token(ID, 0 , 4, "myInt"),
+				new Token(EOF, 0, 9, ""));
 	}
 	
 	@Test
 	public void testLiterals(){
-		
+		runtest("323232", 
+				new Token(INT_LITERAL, 0, 0, "323232"),
+				new Token(EOF, 0, 6, ""));
 	}
 	
 	
