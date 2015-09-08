@@ -63,6 +63,22 @@ type					{return token(TYPE);}
 void					{return token(VOID);}
 while					{return token(WHILE);}
 
+// Punctuation symbols
+"," 					{return token(COMMA);}
+"["						{return token(LBRACKET);}
+"{"						{return token(LCURLY);}
+"("						{return token(LPAREN);}
+"]"						{return token(RBRACKET);}
+"}"						{return token(RCURLY);}
+")"						{return token(RPAREN);}
+";"						{return token(SEMICOLON);}
+
+
+// Operators
+
+// Identifiers
+
+// Literals
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }

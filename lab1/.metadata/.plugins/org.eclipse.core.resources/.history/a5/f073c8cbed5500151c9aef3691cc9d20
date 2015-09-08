@@ -64,15 +64,7 @@ void					{return token(VOID);}
 while					{return token(WHILE);}
 
 // Punctuation symbols
-"," 					{return token(COMMA);}
-"["						{return token(LBRACKET);}
-"{"						{return token(LCURLY);}
-"("						{return token(LPAREN);}
-"]"						{return token(RBRACKET);}
-"}"						{return token(RCURLY);}
-")"						{return token(RPAREN);}
-";"						{return token(SEMICOLON);}
-
+, 					{return token(COMMA);}
 
 // Operators
 

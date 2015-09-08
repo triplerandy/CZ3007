@@ -92,16 +92,16 @@ public class LexerTests {
 	
 	@Test
 	public void testPunctuationSymbols(){
-		runtest(" , [ { ( ] } ) ;", 
+		runtest(" , [ { ( ]", 
 				new Token(COMMA, 0, 1, ","),
 				new Token(LBRACKET, 0, 3, "[" ),
 				new Token(LCURLY, 0, 5, "{"),
 				new Token(LPAREN, 0, 7, "("),
-				new Token(RBRACKET,0, 9, "]"),
-				new Token(RCURLY, 0, 11, "}"),
-				new Token(RPAREN, 0, 13, ")"),
-				new Token(SEMICOLON, 0, 15, ";"),
-				new Token(EOF, 0, 16, ""));
+				new Token(RBRACKET,0, 8, "]"),
+				new Token(RCURLY, 0, 10, "}"),
+				new Token(RPAREN, 0, 12, ")"),
+				new Token(SEMICOLON, 0, 14, ";"),
+				new Token(EOF, 0, 9, ""));
 	}
 	@Test
 	public void testOperators(){
