@@ -107,17 +107,17 @@ public class LexerTests {
 	public void testOperators(){
 		runtest(" / == = >= > <= < - != + *", 
 				new Token(DIV, 0, 1, "/"),
-				new Token(EQEQ, 0, 3, "=="),
-				new Token(EQL, 0, 6, "="),
-				new Token(GEQ, 0, 8, ">="),
-				new Token(GT, 0, 11, ">"),
-				new Token(LEQ, 0, 13, "<="),
-				new Token(LT, 0, 16,"<"),
-				new Token(MINUS, 0, 18, "-"),
-				new Token(NEQ, 0, 20, "!="),
-				new Token(PLUS, 0, 23, "+"),
-				new Token(TIMES, 0, 25, "*"),
-				new Token(EOF, 0, 26, ""));
+				new Token(EQEQ, 0, 0, "=="),
+				new Token(EQL, 0, 0, "="),
+				new Token(GEQ, 0, 0, ">="),
+				new Token(GT, 0, 0, ">"),
+				new Token(LEQ, 0, 0, "<="),
+				new Token(LT, 0, 0,"<"),
+				new Token(MINUS, 0, 0, "-"),
+				new Token(NEQ, 0, 0, "!="),
+				new Token(PLUS, 0, 0, "+"),
+				new Token(TIMES, 0, 0, "*"),
+				new Token(EOF, 0, 0, ""));
 	}
 	
 	@Test

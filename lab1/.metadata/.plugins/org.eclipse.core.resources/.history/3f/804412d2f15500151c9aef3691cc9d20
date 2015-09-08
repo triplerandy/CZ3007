@@ -117,7 +117,7 @@ public class LexerTests {
 				new Token(NEQ, 0, 20, "!="),
 				new Token(PLUS, 0, 23, "+"),
 				new Token(TIMES, 0, 25, "*"),
-				new Token(EOF, 0, 26, ""));
+				new Token(EOF, 0, 0, ""));
 	}
 	
 	@Test
