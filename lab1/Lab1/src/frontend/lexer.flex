@@ -22,7 +22,7 @@ import static frontend.Token.Type.*;
 	*/
 	
 	private Token token(Token.Type type) {
-		return new Token(type, 0, 0, "");
+		return new Token(type, yyline, yycolumn, yytext());
 	}
 	
 	/* Use this method for rules where you need to process yytext() to get the lexeme of the token.
@@ -46,6 +46,23 @@ Digit = [0-9]
 {WhiteSpace}+                      {System.out.println("I am whitespace");}
 {Digit}{Digit}ab			{return token(INT_LITERAL);}
 {Digit}{Digit}bc			{return token(STRING_LITERAL);}
+
+// Keywords
+boolean					{return token(BOOLEAN);}
+break 					{return token(BREAK);}
+else					{return token(ELSE);}
+if						{return token(IF);}
+import 					{return token(IMPORT);}
+int						{return token(INT);}
+public 					{return token(PUBLIC);}
+module					{return token(MODULE);}
+return 					{return token(RETURN);}
+false 					{return token(FALSE);}
+true					{return token(TRUE);}
+type					{return token(TYPE);}
+void					{return token(VOID);}
+while					{return token(WHILE);}
+
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }

@@ -72,9 +72,9 @@ public class LexerTests {
 	
 	@Test
 	public void testKeywords(){
-		runtest("boolean break else if import int module public return false true type void while",
-				new Token(BOOLEAN, 0, 0, "boolean"), 
-				new Token(BREAK, 0,8 ,"break"),
+		runtest("boolean break else if import int public module return false true type void \n while",  
+				new Token(BOOLEAN, 0, 0, "boolean"),
+				new Token(BREAK, 0, 8,"break"),
 				new Token(ELSE, 0, 14, "else"),
 				new Token(IF, 0, 19, "if"),
 				new Token(IMPORT, 0, 22 , "import"),
@@ -86,8 +86,8 @@ public class LexerTests {
 				new Token(TRUE, 0, 60, "true"),
 				new Token(TYPE, 0, 65, "type"),
 				new Token(VOID, 0, 70, "void"),
-				new Token(WHILE, 0, 75, "while"), 
-				new Token(EOF, 0, 79, ""));
+				new Token(WHILE, 1, 1, "while"), 
+				new Token(EOF, 1, 6, ""));
 	}
 	
 	@Test
@@ -108,10 +108,24 @@ public class LexerTests {
 	@Test
 	public void testTry(){
 		runtest("  23ab    23bc",
-				new Token(INT_LITERAL, 0, 0, ""),
-				new Token(STRING_LITERAL, 0, 0, ""),
+				new Token(INT_LITERAL, 0, 0, "23ab"),
+				new Token(STRING_LITERAL, 0, 0, "23bc"),
 				new Token(EOF, 0, 0, ""));
 	}
+	
+//	@Test
+//	public void testKW(){
+//		runtest(" module break else if int while void type ",
+//				new Token(MODULE, 0, 0, ""),
+//				new Token(BREAK, 0, 0, ""),
+//				new Token(ELSE, 0, 0, ""),
+//				new Token(IF, 0, 0, ""),
+//				new Token(INT, 0, 0, ""),
+//				new Token(WHILE, 0, 0, ""),
+//				new Token(VOID, 0, 0, ""),
+//				new Token(TYPE, 0, 0, ""),
+//				new Token(EOF, 0, 0, ""));
+//	}
 	
 //	@Test
 //	public void testOperators(){
