@@ -16,34 +16,37 @@ import static frontend.Token.Type.*;
 %column
 
 %{
-	/* These two methods are for the convenience of rules to create token objects.
-	* If you do not want to use them, delete them
-	* otherwise add the code in 
-	*/
-	
-	private Token token(Token.Type type) {
-		return new Token(type, yyline, yycolumn, yytext());
-	}
-	
-	/* Use this method for rules where you need to process yytext() to get the lexeme of the token.
-	 *
-	 * Useful for string literals; e.g., the quotes around the literal are part of yytext(),
-	 *       but they should not be part of the lexeme. 
-	*/
-	private Token token(Token.Type type, String text) {
-		return new Token(type, yyline, yycolumn, text);
-	}
+    class SLIdentifier {
+        StringBuffer string = new StringBuffer(); // for String literal
+        int line, column;
+    }
+    SLIdentifier stringLiteralIdentifier = new SLIdentifier();
+    /* Use these two methods to construct token objects to return from the rules. */
+
+    
+    private Token token(Token.Type type) {
+        return new Token(type, yyline, yycolumn, yytext());
+    }
+
+    private Token token(Token.Type type, String text) {
+        return new Token(type, yyline, yycolumn, text);
+    }
+    private Token token(Token.Type type, String text, int line, int column) {
+        return new Token(type, line, column, text);
+    }
 %}
 
+
 /* This definition may come in handy. If you wish, you can add more definitions here. */
+%state STRING
 WhiteSpace = [" "] | \t | \f | \n | \r
 Digit = [0-9]
 
+%% /* for String literal */
 
+/* put in your rules here.*/
 
-%%
-/* put in your rules here.    */
-{WhiteSpace}+                      {System.out.println("I am whitespace");}
+<YYINITIAL> {
 
 // Keywords
 boolean					{return token(BOOLEAN);}
@@ -84,12 +87,45 @@ while					{return token(WHILE);}
 "!="				{return token(NEQ);}
 "+"					{return token(PLUS);}
 "*"					{return token(TIMES);}
+
+//Whitespace
+ {WhiteSpace}+                      {System.out.println("");}
 	
 // Identifiers
-([a-zA-z] | "_")([a-zA-Z] | "_" | {Digit})* 		{return token(ID);} 
+([a-zA-z] | "_")([a-zA-Z] | "_" | [0-9])* 		{return token(ID,yytext());} 
 
 // Literals
-([0-9])+ 			{return token(INT_LITERAL);}
+([0-9])+ 			{return token(INT_LITERAL,yytext());;}
+
+/* Rule for string literals */
+    "\""            { stringLiteralIdentifier.string.setLength(0); stringLiteralIdentifier.line=yyline; stringLiteralIdentifier.column=yycolumn; yybegin(STRING);} 
+
+}
+
+<STRING> {
+  /*
+  input tokens: "import module; \"this is string\\n\";"
+  */
+  "\""                           {
+                                    yybegin(YYINITIAL);
+                                    return token(STRING_LITERAL, stringLiteralIdentifier.string.toString(), stringLiteralIdentifier.line, stringLiteralIdentifier.column);
+                                 } // ending quotes for string literals
+  [^\n\r\"\\]+                   { stringLiteralIdentifier.string.append(yytext()); } // normal string characters
+ 
+  "\\t"                          { stringLiteralIdentifier.string.append('\t'); } // \\t if using regex rather than literal // use the string the match the character in the string 
+  "\\b"                          { stringLiteralIdentifier.string.append('\b'); } // \\b // in the realm of Java String 
+  "\\n"                          { stringLiteralIdentifier.string.append('\n'); } // \\n
+  "\\r"                          { stringLiteralIdentifier.string.append('\r'); } // \\r
+  "\\f"                          { stringLiteralIdentifier.string.append('\f'); } // \\f
+  "\\\""                         { stringLiteralIdentifier.string.append('\"'); } // \\\"
+  "\\\'"                         { stringLiteralIdentifier.string.append('\''); } // \\\'
+  "\\\\"                         { stringLiteralIdentifier.string.append('\\'); } // \\\\ // use the regex is better to understand 
+
+  /* exceptions */
+  \\.                            { throw new RuntimeException("Illegal escape sequence \""+yytext()+"\""); } // regex
+  // Java does not support multi-line string like Python
+  \r|\n|\r\n                     { throw new RuntimeException("Unterminated string at end of line"); }
+}
 
 /* You don't need to change anything below this line. */
 .							{ throw new Error("unexpected character '" + yytext() + "'"); }
