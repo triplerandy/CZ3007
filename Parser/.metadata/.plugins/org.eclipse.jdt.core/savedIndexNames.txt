@@ -1,24 +1,9 @@
-INDEX VERSION 1.127+/home/livetolove128/Courses/Compiler/Parser/.metadata/.plugins/org.eclipse.jdt.core
-1796994250.index
-2295792494.index
-3314417111.index
-4160941338.index
+INDEX VERSION 1.127+/home/livetolove128/Courses/Compiler Lab/Parser/.metadata/.plugins/org.eclipse.jdt.core
 2540607589.index
 4276089004.index
-1904386403.index
 3709572030.index
-3327406048.index
-3147861105.index
-743330272.index
-1650615490.index
-4228010733.index
-3508432072.index
-3422984410.index
-1535649011.index
-2699701280.index
-1685732153.index
 2188923391.index
-2923662273.index
-876672066.index
-2638561248.index
+1535649011.index
 1871474384.index
+4160941338.index
+3327406048.index

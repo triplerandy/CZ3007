@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=Lab4/src&lt;backend{FunctionCodeGenerator.java[FunctionCodeGenerator" modifiers="1" timestamp="1446985507000"/>
 <typeInfo handle="=Lab2/\/home\/livetolove128\/JavaDevelopement\/jdk1.7.0_79\/jre\/lib\/rt.jar&lt;com.sun.xml.internal.ws.api.addressing(AddressingVersion$EPR.class[EPR" modifiers="25" timestamp="1428693265000"/>
-<typeInfo handle="=Lab4/src&lt;backend{StmtCodeGenerator.java[StmtCodeGenerator" modifiers="1" timestamp="1447000660000"/>
-<typeInfo handle="=Lab4/src&lt;backend{ExprCodeGenerator.java[ExprCodeGenerator" modifiers="1" timestamp="1446989051000"/>
-<typeInfo handle="=Lab4/src&lt;test{CompilerTests.java[CompilerTests" modifiers="1" timestamp="1446989079000"/>
-<typeInfo handle="=Lab4/src&lt;ast{Visitor.java[Visitor" modifiers="1" timestamp="1446929048000"/>
 </typeInfoHistroy>

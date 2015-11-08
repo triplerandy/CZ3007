@@ -328,18 +328,20 @@ public class CompilerTests {
 				2);
 	}
 	
-	@Test
-	public void testWhile(){
-		runtest("module Test {public int f() {" + 
-				"if(0) return 1;" + 
-				"else return 2;" + 
-				"}" + 
-				"}",
+	@Test public void testWhile() {
+		runtest("module Test {public int f() {int x; x = 0; while(x<3) x=4; return x;}}",
+				"Test",
+				"f",
+				new Class<?>[0],
+				new Object[0],
+				4);
+	}
+	@Test public void testBreak() {
+		runtest("module Test {public int f() {int x; x = 0; while(x<43) {x=5; break;} return x;}}",
 				"Test",
 				"f",
 				new Class<?>[0],
 				new Object[0],
 				5);
 	}
-	
 }

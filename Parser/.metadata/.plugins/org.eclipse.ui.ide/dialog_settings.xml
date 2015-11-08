@@ -5,6 +5,7 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/home/livetolove128/Courses/Compiler Lab/Code Generator/Lab4"/>
 			<item value="/home/livetolove128/Courses/Compiler/Code Generator"/>
 			<item value="/home/livetolove128/Courses/Compiler/Parser"/>
 			<item value="/home/livetolove128/Courses/Compiler/lab4/Lab4"/>
