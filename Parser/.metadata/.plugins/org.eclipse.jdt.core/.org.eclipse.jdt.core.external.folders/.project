@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>.org.eclipse.jdt.core.external.folders</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>.link0</name>
+			<type>2</type>
+			<location>/home/mschaefer/beaver-0.9.11/beaver-rt/src</location>
+		</link>
+		<link>
+			<name>.link1</name>
+			<type>2</type>
+			<location>/home/livetolove128/JavaDevelopement/jdk1.7.0_79</location>
+		</link>
+	</linkedResources>
+</projectDescription>
